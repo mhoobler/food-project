@@ -10,8 +10,10 @@ var config = {
 firebase.initializeApp(config);
 
 
+// elements to use
+var loginBtn = $("#login-btn")
 //login event
-$("#login-btn").on("click", e => {
+loginBtn.on("click", e => {
     e.preventDefault();
     //get values for email & password
     var email = $("#email-input").val();

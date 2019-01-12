@@ -1,0 +1,22 @@
+{
+  "name": "food-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint assets/javascript/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhoobler/food-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhoobler/food-project/issues"
+  },
+  "homepage": "https://github.com/mhoobler/food-project#readme",
+  "dependencies": {
+    "jshint": "^2.9.7"
+  }
+}

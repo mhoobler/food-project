@@ -27,11 +27,11 @@
     font-size: 1.5rem;
   }
   /* .card-img-left  */
- .card-signin #img { 
+  #imgz #img1 { 
 
     width: 45%;
     /* Link to your background image using in the property below! */
-    background: scroll center url("//assets/images/rachel-park-366508-unsplash.jpg");
+    background-image: scroll center url('../images/rachel-park-366508-unsplash.jpg');
     background-size: cover;
   }
   

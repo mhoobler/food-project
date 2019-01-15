@@ -26,14 +26,15 @@
     font-weight: 300;
     font-size: 1.5rem;
   }
-  /* .card-img-left  */
-  #imgz #img1 { 
+  /* .card-img-left   */
+   #imgz #img1 { 
 
     width: 45%;
     /* Link to your background image using in the property below! */
-    background-image: scroll center url('../images/rachel-park-366508-unsplash.jpg');
+    background-image: url('../images/rachel-park-366508-unsplash.jpg');
     background-size: cover;
-  }
+  } 
+  
   
   .card-signin .card-body {
     padding: 2rem;

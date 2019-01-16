@@ -4,6 +4,10 @@
 	<title>Login V18</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+	
+    <script
+    type="text/javascript" src="assets\javascript\login.js"></script>
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -39,14 +43,14 @@
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
+						<input class="input100" type="text" name="email" id="loginEmail">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
 					</div>
 					
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="pass" id="loginPassword">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Password</span>
 					</div>
@@ -68,7 +72,7 @@
 			
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit" onclick="register()">
 							Login
 						</button>
 					</div>

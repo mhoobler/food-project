@@ -21,17 +21,12 @@ body{
 img{
     transition: all 1.5s;
 }
-.apple:hover{
-    transform: scale(.9);
-}
-.carrot:hover{
-    transform: scale(.9);
-}
-.pear:hover{
+
+/*.grid-item:hover{
     transform: scale(.9);
     animation: move 8s infinite;
    
-}
+}*/
 @keyframes move{
     20%{
         transform: rotateY(10deg) rotateX(10deg);
@@ -101,4 +96,14 @@ img{
 .box1{
     border: 2px solid white;
     border-radius: 75px;
+}
+
+#selection{
+    font-size: 20px;
+}
+
+#nutrition-facts{
+    width: 50px;
+    font-size: 20px;
+    display: none;
 }

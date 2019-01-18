@@ -17,21 +17,43 @@ $(document).on("click", ".selected", function() {
 //     $("#nutrition-facts").css("display", "none");
 //     $("#nutrition-facts").css("float", "none");
 // })
-
-//hover stuff
-// $(".grid-item").mouseenter(function(){
-//     $("#nutrition-facts").css("display", "none");
-//     $("#nutrition-facts").css("float", "none");
-// }).mouseleave(function(){
-//     var value = $(this).attr("value");
-//     console.log(value);
-
-//     return firebase.database().ref('/ndbno/' + value).once('value').then(function(snapshot) {
+//farhan hover try
+// $(".grid-item").on({
+//     mouseenter: function(event) {
+//         var value = $(this).attr("value");
+//         console.log(value);
+//             return firebase.database().ref('/ndbno/' + value).once('value').then(function(snapshot) {
 //     var ndbno = snapshot.val();
 //     console.log(ndbno);
 //     apiCall(ndbno);
 //     });
-// })
+
+
+//         $("#nutrition-facts").css({display:block}).show();
+//     },
+//     mouseleave: function() {
+//         $("#nutrition-facts").hide();
+//     }
+// });
+
+
+
+
+
+// hover stuff
+$(".body-panel .grid-item").mouseenter(function(){
+    // $("#nutrition-facts").css("display", "none");
+    // $("#nutrition-facts").css("float", "none");
+}).mouseleave(function(){
+    var value = $(this).attr("value");
+    console.log(value);
+
+    return firebase.database().ref('/ndbno/' + value).once('value').then(function(snapshot) {
+    var ndbno = snapshot.val();
+    console.log(ndbno);
+    apiCall(ndbno);
+    });
+})
 
 function apiCall(code){
     console.log(code);
@@ -107,6 +129,7 @@ db.ref("/users/").on("value", function(snapshot) {
     firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
         var array = snapshot.val().testArray;
         $("#selection").empty();
+        
         for(i=0; i<array.length; i++){
             var p = $("<p>");
             p.text(array[i]);

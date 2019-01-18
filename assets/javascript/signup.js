@@ -29,11 +29,11 @@ $("#register").on("click", function(){
         var postData = {
           email: userEmail,
           joinDate: "11-11-11",
-          testArray: []
+          testArray: [],
+          recipe: []
         };
       
         // Get a key for a new Post.
-        var newPostKey = firebase.database().ref().child('posts').push().key;
       
         // Write the new post's data simultaneously in the posts list and the user's post list.
         var updates = {};

@@ -24,12 +24,33 @@ $("#search-btn").on("click", function(){
                 console.log(usableResponse);
                 
                 var dishTitle = $("<div>").text(usableResponse.recipes[k].title);
-                $("#recipes").append(dishTitle);
+                
     
                 var nextDish = $("<img>").attr('src', usableResponse.recipes[k].image_url);
-                $("#recipes").append(nextDish);
+                nextDish.addClass("rounded-circle");
+                var checkBox = $("<button>").attr("class", "recipe-btn");
+                checkBox.text("x");
+                checkBox.attr("data-url", usableResponse.recipes[k].source_url);
+                checkBox.attr("data-title", usableResponse.recipes[k].title);
+
+                dishTitle.append(checkBox);
+                dishTitle.append(nextDish);
+                $("#recipes").append(dishTitle);
             };
         }); 
     })
     
+})
+
+$(document).on("click", ".recipe-btn", function(){
+    var userId = auth.currentUser.uid;
+    var title = $(this).attr("data-title");
+    var url = $(this).attr("data-url");
+
+    var userData = url;
+
+    var updates = {};
+    updates["/users/" + userId + "/recipes/" + title] = userData;
+
+    return db.ref().update(updates);
 })

@@ -1,26 +1,20 @@
 // Initialize Firebase
 
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAKkOqtPx4XjAKEsuOuytwFr3O_ZgfPe1A",
-    authDomain: "projectusers.firebaseapp.com",
-    databaseURL: "https://projectusers.firebaseio.com",
-    projectId: "projectusers",
-    storageBucket: "projectusers.appspot.com",
-    messagingSenderId: "159557786382"
-  };
-  firebase.initializeApp(config);
-
-  function login(){
-
+var errorCheck = false;
+$("#login").on("click", function(){
     var loginEmail = $('#loginEmail').val();
     var loginPassword = $('#loginPassword').val();
-  firebase.auth().signInWithEmailAndPassword(loginEmail, loginPassword).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-    alert("Error:"+errorMessage)
-
+    auth.signInWithEmailAndPassword(loginEmail, loginPassword).catch(function(error) {
+      // Handle Errors here.
+      errorCheck = true;
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+      alert("Error:"+errorMessage)
+  }).then(function() {
+    if(!errorCheck){
+      window.location.href = "virtualproject2.html";
+    }
   });
-}
+})

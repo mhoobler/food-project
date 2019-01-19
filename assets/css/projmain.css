@@ -1,5 +1,17 @@
 
-    @import url('https://fonts.googleapis.com/css?family=Lobster');
+     @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great');
+
+     h1{
+         font-family: 'Fredericka the Great', cursive;
+         font-size: 100px;
+         vertical-align: text-top;
+         background: -webkit-linear-gradient(rgb(0, 8, 15), rgb(4, 193, 250));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-align: center;
+     }
+
+@import url('https://fonts.googleapis.com/css?family=Lobster');
 body{
     font-family: 'Lobster', cursive;
     margin: 5;
@@ -20,8 +32,8 @@ body{
    
 }
 
-.container{
- 
+p{
+    color: black;
 }
 
 body{
@@ -51,8 +63,8 @@ body{
     animation-fill-mode: forwards;
 }
 @keyframes heading{
-    0% {top:-40px;}
-    100%{top:200px;}
+    0% {top:-20px;}
+    100%{top:40px;}
 }
 #content{
     position: relative;
@@ -61,7 +73,7 @@ body{
     animation-fill-mode: forwards;
 }
 @keyframes content{
-    0% {left:-1000px;}
+    0% {left:-300px;}
     100%{left:0px;}
 }
 .btn{
@@ -87,9 +99,3 @@ body{
     0% {opacity: 0}
     100%{opacity: 1}
 }
-
-
-
-
-
-   

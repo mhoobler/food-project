@@ -1,0 +1,102 @@
+
+   
+     @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great');
+
+     h1{
+         font-family: 'Fredericka the Great', cursive;
+         font-size: 100px;
+         vertical-align: text-top;
+         background: -webkit-linear-gradient(rgb(0, 8, 15), rgb(4, 193, 250));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-align: center;
+     }
+
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+body{
+    font-family: 'Lobster', cursive;
+    margin: 5;
+    /* background-color: rgb(126, 195, 212); */
+   background-image: url("https://unsplash.com/photos/ocnsb17U6FE"); 
+    
+    
+    height: auto;
+     background-image: url("https://images.unsplash.com/photo-1543364195-bfe6e4932397?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+    /* height: 500px; */
+    /* background-size: 100%;
+    background-repeat: none; */ 
+   
+    /* background-image: url("https://www.riveroaksplanthouse.com/wp-content/uploads/2017/06/the-right-topiary-for-your-landscaping.jpg"); */
+    /* height: 500px; */
+    background-size: 100%;
+    background-repeat: none;
+   
+}
+
+p{
+    color: black;
+}
+
+body{
+    
+    /* font-family: "Times New Roman", Times, serif; */
+    
+    color:#fff;
+    line-height: 1.6;
+    text-align: center;
+}
+.container{
+    color: white;
+    max-width: 960px;
+    margin: auto;
+    padding: 0 30px;   
+}
+#showcase{
+    height: 300px;
+}
+
+#showcase h1{
+    font-size:50px;
+    line-height:1.3;
+    position: relative;
+    animation: heading;
+    animation-duration:3s;
+    animation-fill-mode: forwards;
+}
+@keyframes heading{
+    0% {top:-20px;}
+    100%{top:40px;}
+}
+#content{
+    position: relative;
+    animation-name: content;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+@keyframes content{
+    0% {left:-300px;}
+    100%{left:0px;}
+}
+.btn{
+    display: inline-block;
+    color:white;
+    background-color: lightgreen;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border: hotpink 1px solid;
+    margin-top:1;
+    opacity: 0;
+    animation-name:btn;
+    animation-duration:3s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    transition-property: transform;
+    transition-duration: 3s;
+}
+.btn:hover{
+    transform: rotateY(180deg)
+}
+@keyframes btn{
+    0% {opacity: 0}
+    100%{opacity: 1}
+}

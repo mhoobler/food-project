@@ -1,5 +1,4 @@
 
-   
      @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great');
 
      h1{
@@ -7,7 +6,7 @@
          font-size: 100px;
          vertical-align: text-top;
          background: -webkit-linear-gradient(rgb(0, 8, 15), rgb(4, 193, 250));
--webkit-background-clip: text;
+// -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 text-align: center;
      }
@@ -72,6 +71,7 @@ body{
     animation-name: content;
     animation-duration: 3s;
     animation-fill-mode: forwards;
+    margin-top: -68px;
 }
 @keyframes content{
     0% {left:-300px;}
@@ -80,10 +80,10 @@ body{
 .btn{
     display: inline-block;
     color:white;
-    background-color: lightgreen;
+    background-color: rgb(7, 93, 133);
     text-decoration: none;
     padding: 1rem 2rem;
-    border: hotpink 1px solid;
+    border: hotpink 2px solid;
     margin-top:1;
     opacity: 0;
     animation-name:btn;

@@ -109,6 +109,12 @@ $(".grid-item").on("click", function(){
             }
         }
     }
+
+    if($("#line").attr("value") == "saved" || $("#line").attr("value") == null){
+        $("#line").attr("value", "not-saved");
+        $("#line").text("Click Here to Save your selection to your Profile");
+        console.log($("#line"));
+    }
 })
 
 
@@ -119,7 +125,16 @@ $("#push-selection").on("click", function(){
     var updates = {};
     updates["/users/" + user + "/testArray"] = userData;
 
-    return db.ref().update(updates)
+    return db.ref().update(updates).catch(function(error){
+        if(!error){
+            $("#line").text("Your selection was pushed");
+            $("#line").attr("value", "saved");
+        }
+        else{
+            console.log(error);
+        }
+
+    })
 })
 
 db.ref("/users/").on("value", function(snapshot) {

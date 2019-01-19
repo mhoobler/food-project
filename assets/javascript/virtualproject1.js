@@ -53,7 +53,7 @@ $(document).on("click", ".selected", function() {
 //     }
 // });
 
-});
+//});
 
 
 

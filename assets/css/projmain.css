@@ -71,6 +71,7 @@ body{
     animation-name: content;
     animation-duration: 3s;
     animation-fill-mode: forwards;
+    margin-top: -68px;
 }
 @keyframes content{
     0% {left:-300px;}
@@ -79,10 +80,10 @@ body{
 .btn{
     display: inline-block;
     color:white;
-    background-color: lightgreen;
+    background-color: rgb(7, 93, 133);
     text-decoration: none;
     padding: 1rem 2rem;
-    border: hotpink 1px solid;
+    border: hotpink 2px solid;
     margin-top:1;
     opacity: 0;
     animation-name:btn;

@@ -17,8 +17,25 @@ $(document).on("click", ".selected", function() {
 //     $("#nutrition-facts").css("display", "none");
 //     $("#nutrition-facts").css("float", "none");
 // })
+
 //farhan hover try
-// $(".grid-item").on({
+// $( document ).ready(function() {
+//   $(".body-panel .grid-item").mouseenter(function(){
+//     // $("#nutrition-facts").css("display", "none");
+//     // $("#nutrition-facts").css("float", "none");
+// }).mouseleave(function(){
+//     var value = $(this).attr("value");
+//     console.log(value);
+
+//     return firebase.database().ref('/ndbno/' + value).once('value').then(function(snapshot) {
+//     var ndbno = snapshot.val();
+//     console.log(ndbno);
+//     apiCall(ndbno);
+//     });
+// })
+
+//=========================================================================================
+//     $(".grid-item").on({
 //     mouseenter: function(event) {
 //         var value = $(this).attr("value");
 //         console.log(value);
@@ -36,24 +53,27 @@ $(document).on("click", ".selected", function() {
 //     }
 // });
 
+});
+
+
 
 
 
 
 // hover stuff
-$(".body-panel .grid-item").mouseenter(function(){
-    // $("#nutrition-facts").css("display", "none");
-    // $("#nutrition-facts").css("float", "none");
-}).mouseleave(function(){
-    var value = $(this).attr("value");
-    console.log(value);
+// $(".body-panel .grid-item").mouseenter(function(){
+//     // $("#nutrition-facts").css("display", "none");
+//     // $("#nutrition-facts").css("float", "none");
+// }).mouseleave(function(){
+//     var value = $(this).attr("value");
+//     console.log(value);
 
-    return firebase.database().ref('/ndbno/' + value).once('value').then(function(snapshot) {
-    var ndbno = snapshot.val();
-    console.log(ndbno);
-    apiCall(ndbno);
-    });
-})
+//     return firebase.database().ref('/ndbno/' + value).once('value').then(function(snapshot) {
+//     var ndbno = snapshot.val();
+//     console.log(ndbno);
+//     apiCall(ndbno);
+//     });
+// })
 
 function apiCall(code){
     console.log(code);

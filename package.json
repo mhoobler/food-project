@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/mhoobler/food-project#readme",
   "dependencies": {
-    "jshint": "^2.9.7"
+    "jshint": "^2.9.7",
+    "node-sass": "^4.11.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-wait": "0.0.2"
   }
 }

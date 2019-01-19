@@ -108,3 +108,35 @@ img{
     font-size: 20px;
     
 }
+
+#line{
+    color: white;
+    font-style: bold;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+#cart4{
+    color: black;
+    font-style: bold;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 40px;
+   
+}
+#cart{
+    margin-left: 475px;
+}
+
+#push-selection{
+    position: relative;
+    bottom: 10px;
+    left: 425px;
+    padding: 31px;
+
+}
+
+#boxc{
+    position: absolute;
+}

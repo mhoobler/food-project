@@ -30,7 +30,7 @@ $("#register").on("click", function(){
         var userID = auth.currentUser.uid;
         var postData = {
           email: userEmail,
-          joinDate: date_string;
+          joinDate: date_string,
           testArray: [],
           recipe: []
         };

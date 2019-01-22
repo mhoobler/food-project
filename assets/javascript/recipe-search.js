@@ -1,4 +1,4 @@
-$("#search-btn").on("click", function(){
+$("#search-recipes").on("click", function(){
     
     var userId = auth.currentUser.uid;
     var APIKey = "f2c7f03ce6caef2a5f775dc746cdf6d9";
@@ -11,7 +11,7 @@ $("#search-btn").on("click", function(){
         console.log(currentDish);
         var queryURL = "https://www.food2fork.com/api/search?key=" + APIKey + "&q=" + currentDish + "&page=1";
     
-        $("#gif-view").empty();
+        $("#recipes").empty();
     
         $.ajax({
             url: queryURL,
@@ -27,9 +27,10 @@ $("#search-btn").on("click", function(){
                 
     
                 var nextDish = $("<img>").attr('src', usableResponse.recipes[k].image_url);
-                nextDish.addClass("rounded-circle");
-                var checkBox = $("<button>").attr("class", "recipe-btn");
-                checkBox.text("x");
+                nextDish.addClass("rounded");
+                var checkBox = $("<button>").attr("class", "add-recipe");
+                checkBox.text("Save");
+                checkBox.attr("data-src", usableResponse.recipes[k].image_url)
                 checkBox.attr("data-url", usableResponse.recipes[k].source_url);
                 checkBox.attr("data-title", usableResponse.recipes[k].title);
 
@@ -42,15 +43,94 @@ $("#search-btn").on("click", function(){
     
 })
 
-$(document).on("click", ".recipe-btn", function(){
+$(document).on("click", "#show-recipes", function(){
+    $("#recipes").empty();
     var userId = auth.currentUser.uid;
-    var title = $(this).attr("data-title");
-    var url = $(this).attr("data-url");
+    db.ref("/users/"+userId).on("value", function(snap){
+        var JSON_string = JSON.stringify(snap.child('recipes'));
+        console.log(JSON_string);
+        var JSON_object = JSON.parse(JSON_string);
+        // console.log(JSON_object);
+        var keys = getKeys(JSON_string);
+        console.log(keys);
+        // console.log(JSON_object["Mushroom Grilled Cheese Sandwich (aka The Mushroom Melt)"].img);
+        for(var i=0; i<keys.length; i++){
+            var cut_title = keys[i].split(" ").join("").replace(/[^a-zA-Z ]/g, "");
+            console.log(cut_title);
+            var div = $("<div>").addClass(cut_title);
+            var title = $("<h3>").text(keys[i]);
+            var link = $("<a>").attr("href", JSON_object[keys[i]].url);
+            var img = $("<img>").attr("src", JSON_object[keys[i]].img)
+            var btn = $("<button class='remove-recipe'>").attr("data-rough", keys[i]);
+            btn.attr("data-cut", cut_title);
+            btn.text("Remove");
 
-    var userData = url;
+            link.append(img);
+
+            div.append(title);
+            div.append(link);
+            div.append(btn);
+            $("#recipes").append(div);
+        }
+    })
+})
+
+$(document).on("click", ".add-recipe", function(){
+    var userId = auth.currentUser.uid;
+    var rough_title = $(this).attr("data-title");
+    var url = $(this).attr("data-url");
+    var img_url = $(this).attr("data-src");
+
+    var userData = {
+        url: url,
+        img: img_url
+    };
 
     var updates = {};
-    updates["/users/" + userId + "/recipes/" + title] = userData;
+    updates["/users/" + userId + "/recipes/" + rough_title] = userData;
 
     return db.ref().update(updates);
 })
+
+$(document).on("click", ".remove-recipe", function(){
+    var userId = auth.currentUser.uid;
+    var rough_title = $(this).attr("data-rough");
+    var cut_title = $(this).attr("data-cut");
+    console.log(cut_title);
+    console.log(rough_title);
+
+    $("#recipes").empty();
+    $("."+cut_title).empty();
+
+    return db.ref("/users/" + userId + "/recipes/" + rough_title).remove();
+})
+
+function getKeys(json_string){
+    var temp_string = "";
+    var key_arr = [];
+    var bracket_counter = 0;
+    var quot_counter = 0;
+
+    for(var i=0; i<json_string.length; i++){
+        if(json_string[i] == "\""){
+            quot_counter++;
+            continue;
+        }
+        if(json_string[i] == ":" && bracket_counter == 1){
+            key_arr.push(temp_string);
+        }
+        if(bracket_counter==1 && quot_counter%2 == 1){
+            temp_string = temp_string + json_string[i];
+        }
+        if(json_string[i]=="}"){
+            temp_string = "";
+            bracket_counter--;
+        }
+        if(json_string[i]=="{"){
+            bracket_counter++;
+        }
+    }
+
+    console.log(key_arr);
+    return key_arr;
+}

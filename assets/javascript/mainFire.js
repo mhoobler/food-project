@@ -12,10 +12,45 @@ auth = firebase.auth();
 db = firebase.database();
 
 function checkUser(){
-    if(auth.currentUser !== null){
-        return true;
-    } else {
-        console.log("not logged in");
-        return false;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          updateNav(true);
+          return true
+        } else {
+          // No user is signed in.
+          updateNav(false);
+          if(getWindowLocation() != "signupPage.html" && getWindowLocation() != "login.html"){
+            document.location.href = "signupPage.html";
+          }
+          return false
+        }
+      });
+}
+
+function updateNav(bool){
+    if(bool == true){
+        $(".auth").css("display", "none");
+        $(".user").css("display", "absolute");
+    } else if(bool == false){
+        $(".auth").css("display", "absolute");
+        $(".user").css("display", "none");
     }
+}
+
+checkUser();
+
+$("#logout").on("click", () =>{
+    firebase.auth().signOut().then(() => {
+        console.log("signed-out");
+    }, error => {
+        console.log(error);
+    });
+});
+
+function getWindowLocation(){
+    var longstring = window.location.href;
+    var array = longstring.split("/");
+    console.log(array[array.length -1]);
+    return array[array.length -1];
 }

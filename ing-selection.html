@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Food Recipe Project</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/ing-selection.css">
+
+</head>
+<body>
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link auth" href="login.html">Log In</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link auth" href="signupPage.html">Sign Up</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link user" href="ing-selection.html">Ingredients</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link user" href="recipe-search.html">Recipes</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" id="logout">Log Out</a>
+                  </li>
+                </ul>
+              </nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 ing-cat-container" id="dairy"><img class="category-img" data-target="dairy-form" src=images/Dairy.png>Dairy
+            <br><br>
+            <form class="input-form toggle" id="dairy-form">
+                <label class="btn btn-primary"><input type="checkbox" name="milk" value="milk"> Milk</label>
+                <label class="btn btn-primary"><input type="checkbox" name="butter" value="butter"> Butter<br></label>
+                <label class="btn btn-primary"><input type="checkbox" name="cheddar cheese" value="cheddar-cheese"> Cheddar<br></label> 
+                <label class="btn btn-primary"><input type="checkbox" name="cream cheese" value="cream-cheese"> Cream Cheese<br> </label>
+                <label class="btn btn-primary"><input type="checkbox" name="yogurt" value="yogurt">Yogurt<br> </label>
+            </form>           
+        </div>
+            
+
+        <div class="col-md-2 ing-cat-container" id="meats"><img class="category-img" data-target="meats-form" src=images/Meats.png>Meats
+            <br><br>
+        <form class="input-form toggle" id="meats-form">
+            <label class="btn btn-danger"><input type="checkbox" name="steak" value="steak" >Steak<br></label>
+            <label class="btn btn-danger"><input type="checkbox" name="pork chops" value="pork-chops">Pork Chops<br></label>
+            <label class="btn btn-danger"><input type="checkbox" name="chicken" value="chicken">Chicken<br></label>
+            <label class="btn btn-danger"><input type="checkbox" name="lamb chops" value="lamb-chops">Lamb Chops<br></label> 
+        </form> 
+        </div>
+
+        <div class="col-md-2 ing-cat-container" id="fruits-and-vegetables"><img class="category-img" data-target="fruits-and-vegetables-form" src=images/Fruits.png>Fruits and Vegetables
+            <br><br>
+        <form class="input-form toggle" id="fruits-and-vegetables-form"> 
+            <label class="btn btn-info"><input type="checkbox" name="orange" value="orange" >Orange<br></label>
+            <label class="btn btn-info"><input type="checkbox" name="banana" value="banana">Banana<br></label>
+            <label class="btn btn-info"><input type="checkbox" name="tomatoes" value="tomatoes">Tomatoes<br></label>
+            <label class="btn btn-info"> <input type="checkbox" name="lettuce" value="lettuce">Lettuce<br></label> 
+            <label class="btn btn-info"><input type="checkbox" name="broccoli" value="broccoli">Broccoli<br></label>
+        </form> 
+        </div>
+
+        <div class="col-md-2 ing-cat-container" id="breads-grains"><img class="category-img" data-target="breads-grains-form" src=images/breadGrains.png>Breads and Grains
+            <br><br>
+        <form class="input-form toggle" id="breads-grains-form"> 
+            <label class="btn btn-secondary"><input type="checkbox" name="bread" value="bread" >Bread<br></label>
+            <label class="btn btn-secondary"> <input type="checkbox" name="bread crumbs" value="bread-crumbs">Bread Crumbs<br></label>
+            <label class="btn btn-secondary"> <input type="checkbox" name="rice" value="rice">Rice<br> </label>
+            <label class="btn btn-secondary"><input type="checkbox" name="pie-crust" value="pie-crust">Pie Crust<br> </label>
+            <label class="btn btn-secondary"> <input type="checkbox" name="flour" value="flour">Flour<br> </label>  
+        </form> 
+        </div>
+
+        <div class="col-md-2 ing-cat-container" id="spices"><img class="category-img" data-target="spices-form" src=images/Seasonings.png>Spices
+            <br><br>
+        <form class="input-form toggle" id="spices-form"> 
+            <label class="btn btn-warning"><input type="checkbox" name="garlic" value="garlic-powder" >Garlic Powder<br></label>
+            <label class="btn btn-warning"> <input type="checkbox" name="onion powder" value="onion-powder">Onion Powder<br></label>
+            <label class="btn btn-warning"><input type="checkbox" name="oregano" value="oregano">Oregano<br> </label>
+            <label class="btn btn-warning"><input type="checkbox" name="cinnamon" value="cinnamon">Cinnamon<br> </label>
+            <label class="btn btn-warning"><input type="checkbox" name="vanilla" value="vanilla-extract">Vanilla Extract<br> </label>
+        </form> 
+        </div>
+
+        <div class="col-md-2 ing-cat-container" id="condiments"><img class="category-img" data-target="condiments-form" src=images/Condiments.png>Condiments
+            <br><br>
+        <form class="input-form toggle" id="condiments-form"> 
+            <label class="btn btn-success"><input type="checkbox" name="ketchup" value="ketchup" >Ketchup<br></label>
+            <label class="btn btn-success"><input type="checkbox" name="mayonaisse" value="mayonaisse">Mayonaisse<br></label>
+            <label class="btn btn-success"><input type="checkbox" name="mustard" value="mustard">Mustard<br> </label>
+            <label class="btn btn-success"><input type="checkbox" name="hot-sauce" value="hot-sauce">Hot Sauce<br> </label>
+            <label class="btn btn-success"><input type="checkbox" name="terryaki-sauce" value="terryaki-sauce">Terryaki Sauce<br> </label>
+        </form> 
+        </div>
+
+    </div>
+
+<div class="col-md-4 text-center btn btn-primary" id="submit-ing">Submit</div>
+</div>
+
+<div id="nutrition-facts">
+        <div>calories: <span id="cal"></span></div>
+        <div>fats: <span id="fat"></span></div>
+        <div>carbs: <span id="carb"></span></div>
+        <div>protien: <span id="prot"></span></div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+<script src="assets/javascript/mainFire.js"></script>
+<script src="assets/javascript/ing-selection.js"></script>
+</body>
+</html>

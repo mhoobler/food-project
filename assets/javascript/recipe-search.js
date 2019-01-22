@@ -1,4 +1,4 @@
-$("#search-btn").on("click", function(){
+$("#search-recipes").on("click", function(){
     
     var userId = auth.currentUser.uid;
     var APIKey = "f2c7f03ce6caef2a5f775dc746cdf6d9";
@@ -27,9 +27,9 @@ $("#search-btn").on("click", function(){
                 
     
                 var nextDish = $("<img>").attr('src', usableResponse.recipes[k].image_url);
-                nextDish.addClass("rounded-circle");
-                var checkBox = $("<button>").attr("class", "recipe-btn");
-                checkBox.text("x");
+                nextDish.addClass("rounded");
+                var checkBox = $("<button>").attr("class", "add-recipe");
+                checkBox.text("Save");
                 checkBox.attr("data-src", usableResponse.recipes[k].image_url)
                 checkBox.attr("data-url", usableResponse.recipes[k].source_url);
                 checkBox.attr("data-title", usableResponse.recipes[k].title);
@@ -47,31 +47,39 @@ $(document).on("click", "#show-recipes", function(){
     $("#recipes").empty();
     var userId = auth.currentUser.uid;
     db.ref("/users/"+userId).on("value", function(snap){
-        var test = JSON.stringify(snap.child('recipes'));
-        console.log(test);
-        var test2 = JSON.parse(test);
-        // console.log(test2);
-        var keys = getKeys(test);
+        var JSON_string = JSON.stringify(snap.child('recipes'));
+        console.log(JSON_string);
+        var JSON_object = JSON.parse(JSON_string);
+        // console.log(JSON_object);
+        var keys = getKeys(JSON_string);
         console.log(keys);
-        console.log(test2["Mushroom Grilled Cheese Sandwich (aka The Mushroom Melt)"].img);
+        // console.log(JSON_object["Mushroom Grilled Cheese Sandwich (aka The Mushroom Melt)"].img);
         for(var i=0; i<keys.length; i++){
-            var div = $("<div>");
+            var cut_title = keys[i].split(" ").join("").replace(/[^a-zA-Z ]/g, "");
+            console.log(cut_title);
+            var div = $("<div>").addClass(cut_title);
             var title = $("<h3>").text(keys[i]);
-            var link = $("<a>").attr("href", test2[keys[i]].url);
-            var img = $("<img>").attr("src", test2[keys[i]].img)
-            div.append(title);
+            var link = $("<a>").attr("href", JSON_object[keys[i]].url);
+            var img = $("<img>").attr("src", JSON_object[keys[i]].img)
+            var btn = $("<button class='remove-recipe'>").attr("data-rough", keys[i]);
+            btn.attr("data-cut", cut_title);
+            btn.text("Remove");
+
             link.append(img);
+
+            div.append(title);
             div.append(link);
+            div.append(btn);
             $("#recipes").append(div);
         }
     })
 })
 
-$(document).on("click", ".recipe-btn", function(){
+$(document).on("click", ".add-recipe", function(){
     var userId = auth.currentUser.uid;
-    var title = $(this).attr("data-title");
+    var rough_title = $(this).attr("data-title");
     var url = $(this).attr("data-url");
-    var img_url = $(this).attr("data-src")
+    var img_url = $(this).attr("data-src");
 
     var userData = {
         url: url,
@@ -79,9 +87,22 @@ $(document).on("click", ".recipe-btn", function(){
     };
 
     var updates = {};
-    updates["/users/" + userId + "/recipes/" + title] = userData;
+    updates["/users/" + userId + "/recipes/" + rough_title] = userData;
 
     return db.ref().update(updates);
+})
+
+$(document).on("click", ".remove-recipe", function(){
+    var userId = auth.currentUser.uid;
+    var rough_title = $(this).attr("data-rough");
+    var cut_title = $(this).attr("data-cut");
+    console.log(cut_title);
+    console.log(rough_title);
+
+    $("#recipes").empty();
+    $("."+cut_title).empty();
+
+    return db.ref("/users/" + userId + "/recipes/" + rough_title).remove();
 })
 
 function getKeys(json_string){

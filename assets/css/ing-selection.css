@@ -34,7 +34,14 @@
 }
 
 #nutrition-facts {
+    width: 12%;
     display: none;
+    border: 3px solid black;
+    background-color: #007bff;
+    opacity: .8;
+}
+#nutrition-facts div{
+    border-bottom: 1px solid black;
 }
 /* 
 label.btn{

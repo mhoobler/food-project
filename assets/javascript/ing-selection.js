@@ -38,24 +38,43 @@ $("#submit-ing").on("click", function(){
 
     })
 })
+
+//inOut to stop strange flickering bug
+var inOut = false;
+var value;
+
+//nutrition facts on hover
 $(document).mouseenter(function(main_event) {
+if(!inOut){
     $("label.btn").mouseenter(function(event){
-        var value = $(event.target).children().attr("value")
+        console.log(main_event + event);
+        value = $(event.target).children().attr("value")
+        var color = $(event.target).css("background-color")
         console.log($(event.target).children().attr("value"));
-        $("#nutrition-facts").stop(true,true).css("display", "block");
-        $("#nutrition-facts").offset({top: event.pageY, left: event.pageX});
+        $("#nutrition-facts").css("display", "block");
+        $("#nutrition-facts").css("background-color", color);
+        $("#nutrition-facts").offset({top: event.pageY + 25, left: event.pageX + 25});
         console.log("entered");
+        
         return firebase.database().ref('/ndbno/' + value).once('value').then(function(snapshot) {
+            if(!inOut){
             var ndbno = snapshot.val();
             console.log(ndbno);
             apiCall(ndbno);
+            console.log(inOut);
+            }
+            inOut=true;
         });
-    
+    })
+}
+    $("label.btn").mouseleave(function(){
+        console.log("out");
+        $("#nutrition-facts").stop(true,true).css("display", "none");
+        if(inOut){
+            inOut=false;
+        }
     })
 
-    $("label.btn").mouseleave(function(){
-        $("#nutrition-facts").stop(true,true).css("display", "none");
-    })
 })
 
 function apiCall(code){

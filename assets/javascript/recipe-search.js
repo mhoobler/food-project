@@ -11,7 +11,7 @@ $("#search-btn").on("click", function(){
         console.log(currentDish);
         var queryURL = "https://www.food2fork.com/api/search?key=" + APIKey + "&q=" + currentDish + "&page=1";
     
-        $("#gif-view").empty();
+        $("#recipes").empty();
     
         $.ajax({
             url: queryURL,
@@ -30,6 +30,7 @@ $("#search-btn").on("click", function(){
                 nextDish.addClass("rounded-circle");
                 var checkBox = $("<button>").attr("class", "recipe-btn");
                 checkBox.text("x");
+                checkBox.attr("data-src", usableResponse.recipes[k].image_url)
                 checkBox.attr("data-url", usableResponse.recipes[k].source_url);
                 checkBox.attr("data-title", usableResponse.recipes[k].title);
 
@@ -42,15 +43,70 @@ $("#search-btn").on("click", function(){
     
 })
 
+$(document).on("click", "#show-recipes", function(){
+    $("#recipes").empty();
+    var userId = auth.currentUser.uid;
+    db.ref("/users/"+userId).on("value", function(snap){
+        var test = JSON.stringify(snap.child('recipes'));
+        // console.log(test);
+        var test2 = JSON.parse(test);
+        // console.log(test2);
+        var keys = getKeys(test);
+        // console.log(keys);
+        // console.log(test2[keys[0]].img);
+        for(var i=0; i<keys.length; i+=2){
+            var div = $("<div>");
+            var title = $("<h3>").text(keys[i]);
+            var link = $("<a>").attr("href", test2[keys[i]].url);
+            var img = $("<img>").attr("src", test2[keys[i]].img)
+            div.append(title);
+            link.append(img);
+            div.append(link);
+            $("#recipes").append(div);
+        }
+    })
+})
+
 $(document).on("click", ".recipe-btn", function(){
     var userId = auth.currentUser.uid;
     var title = $(this).attr("data-title");
     var url = $(this).attr("data-url");
+    var img_url = $(this).attr("data-src")
 
-    var userData = url;
+    var userData = {
+        url: url,
+        img: img_url
+    };
 
     var updates = {};
     updates["/users/" + userId + "/recipes/" + title] = userData;
 
     return db.ref().update(updates);
 })
+
+function getKeys(json_string){
+    var temp_string = "";
+    var key_arr = [];
+    var bracket_counter = 0;
+
+    for(var i=0; i<json_string.length; i++){
+        if(json_string[i] == "\""){
+            continue;
+        }
+        if(json_string[i] == ":" && bracket_counter == 1){
+            key_arr.push(temp_string);
+        }
+        if(bracket_counter==1){
+            temp_string = temp_string + json_string[i];
+        }
+        if(json_string[i]=="}"){
+            bracket_counter--;
+        }
+        if(json_string[i]=="{"){
+            bracket_counter++;
+        }
+    }
+
+    console.log(key_arr);
+    return key_arr;
+}

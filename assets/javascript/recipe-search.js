@@ -48,13 +48,13 @@ $(document).on("click", "#show-recipes", function(){
     var userId = auth.currentUser.uid;
     db.ref("/users/"+userId).on("value", function(snap){
         var test = JSON.stringify(snap.child('recipes'));
-        // console.log(test);
+        console.log(test);
         var test2 = JSON.parse(test);
         // console.log(test2);
         var keys = getKeys(test);
-        // console.log(keys);
-        // console.log(test2[keys[0]].img);
-        for(var i=0; i<keys.length; i+=2){
+        console.log(keys);
+        console.log(test2["Mushroom Grilled Cheese Sandwich (aka The Mushroom Melt)"].img);
+        for(var i=0; i<keys.length; i++){
             var div = $("<div>");
             var title = $("<h3>").text(keys[i]);
             var link = $("<a>").attr("href", test2[keys[i]].url);
@@ -88,18 +88,21 @@ function getKeys(json_string){
     var temp_string = "";
     var key_arr = [];
     var bracket_counter = 0;
+    var quot_counter = 0;
 
     for(var i=0; i<json_string.length; i++){
         if(json_string[i] == "\""){
+            quot_counter++;
             continue;
         }
         if(json_string[i] == ":" && bracket_counter == 1){
             key_arr.push(temp_string);
         }
-        if(bracket_counter==1){
+        if(bracket_counter==1 && quot_counter%2 == 1){
             temp_string = temp_string + json_string[i];
         }
         if(json_string[i]=="}"){
+            temp_string = "";
             bracket_counter--;
         }
         if(json_string[i]=="{"){

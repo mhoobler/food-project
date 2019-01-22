@@ -14,7 +14,7 @@ $("#login").on("click", function(){
       alert("Error:"+errorMessage)
   }).then(function() {
     if(!errorCheck){
-      window.location.href = "virtualproject2.html";
+      window.location.href = "ing-selection.html";
     }
   });
 })

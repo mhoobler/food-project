@@ -13,6 +13,8 @@ $("#register").on("click", function(){
     var userPassword = $('#inputPassword').val();
     console.log(userEmail);
     console.log(userPassword);
+    var date = new Date();
+    var date_string = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
    
     auth.createUserWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
       // Handle Errors here.
@@ -28,7 +30,7 @@ $("#register").on("click", function(){
         var userID = auth.currentUser.uid;
         var postData = {
           email: userEmail,
-          joinDate: "11-11-11",
+          joinDate: date_string;
           testArray: [],
           recipe: []
         };
@@ -39,7 +41,7 @@ $("#register").on("click", function(){
         var updates = {};
         updates['/users/' + userID] = postData;
       
-        return firebase.database().ref().update(updates).then(function() {window.location.href = "virtualproject2.html"});
+        return firebase.database().ref().update(updates).then(function() {window.location.href = "ing-selection.html"});
       }
     });;
   

@@ -146,14 +146,12 @@ $("#push-selection").on("click", function(){
     updates["/users/" + user + "/testArray"] = userData;
 
     return db.ref().update(updates).catch(function(error){
-        if(!error){
-            $("#line").text("Your selection was pushed");
-            $("#line").attr("value", "saved");
-        }
-        else{
-            console.log(error);
-        }
+        var errorCode = error.code;
+        var errorMessage = error.message;
 
+    }).then(function(){
+        $("#line").text("Your selection was pushed");
+            $("#line").attr("value", "saved");
     })
 })
 

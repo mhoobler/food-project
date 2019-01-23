@@ -43,6 +43,12 @@
 #nutrition-facts div{
     border-bottom: 1px solid black;
 }
+
+#recipebtn a {
+    color: aliceblue;
+    
+}
+
 /* 
 label.btn{
     padding: 0px;

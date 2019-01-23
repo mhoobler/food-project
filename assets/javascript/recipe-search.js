@@ -1,3 +1,4 @@
+//Search for recipes with food2fork api
 $("#search-recipes").on("click", function(){
     
     var userId = auth.currentUser.uid;
@@ -43,10 +44,12 @@ $("#search-recipes").on("click", function(){
     
 })
 
+//show recipes
 $(document).on("click", "#show-recipes", function(){
     $("#recipes").empty();
     var userId = auth.currentUser.uid;
     db.ref("/users/"+userId).on("value", function(snap){
+        //get JSON formatted into useable string
         var JSON_string = JSON.stringify(snap.child('recipes'));
         console.log(JSON_string);
         var JSON_object = JSON.parse(JSON_string);
@@ -54,12 +57,13 @@ $(document).on("click", "#show-recipes", function(){
         var keys = getKeys(JSON_string);
         console.log(keys);
         // console.log(JSON_object["Mushroom Grilled Cheese Sandwich (aka The Mushroom Melt)"].img);
+        //Make html Elements for saved recipes
         for(var i=0; i<keys.length; i++){
             var cut_title = keys[i].split(" ").join("").replace(/[^a-zA-Z ]/g, "");
             console.log(cut_title);
             var div = $("<div>").addClass(cut_title);
             var title = $("<h3>").text(keys[i]);
-            var link = $("<a>").attr("href", JSON_object[keys[i]].url);
+            var link = $("<a target='_blank'>").attr("href", JSON_object[keys[i]].url);
             var img = $("<img>").attr("src", JSON_object[keys[i]].img)
             var btn = $("<button class='remove-recipe'>").attr("data-rough", keys[i]);
             btn.attr("data-cut", cut_title);
@@ -75,6 +79,7 @@ $(document).on("click", "#show-recipes", function(){
     })
 })
 
+//save recipe into firebase
 $(document).on("click", ".add-recipe", function(){
     var userId = auth.currentUser.uid;
     var rough_title = $(this).attr("data-title");
@@ -92,6 +97,7 @@ $(document).on("click", ".add-recipe", function(){
     return db.ref().update(updates);
 })
 
+//remove recipe from firebase
 $(document).on("click", ".remove-recipe", function(){
     var userId = auth.currentUser.uid;
     var rough_title = $(this).attr("data-rough");
@@ -105,6 +111,7 @@ $(document).on("click", ".remove-recipe", function(){
     return db.ref("/users/" + userId + "/recipes/" + rough_title).remove();
 })
 
+//Find/make valid keys for firebase children
 function getKeys(json_string){
     var temp_string = "";
     var key_arr = [];

@@ -29,13 +29,10 @@ $("#submit-ing").on("click", function(){
     updates["/users/" + user + "/testArray"] = userData;
 
     return db.ref().update(updates).catch(function(error){
-        if(!error){
-            $("#submit-ing").text("Saved");
-        }
-        else{
-            console.log(error);
-        }
-
+        console.log(error);
+    }).then(function(){
+        $("#submit-ing").text("Saved");
+            console.log("saved");
     })
 })
 

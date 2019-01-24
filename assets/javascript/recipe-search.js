@@ -24,8 +24,8 @@ $("#search-recipes").on("click", function(){
                 var usableResponse = JSON.parse(response);
                 console.log(usableResponse);
                 
-                var dishTitle = $("<div>").text(usableResponse.recipes[k].title);
-                
+                var dishTitle = $("<div>");
+                var part = $('<p>').text(usableResponse.recipes[k].title);
     
                 var nextDish = $("<img>").attr('src', usableResponse.recipes[k].image_url);
                 nextDish.addClass("rounded");
@@ -34,7 +34,7 @@ $("#search-recipes").on("click", function(){
                 checkBox.attr("data-src", usableResponse.recipes[k].image_url)
                 checkBox.attr("data-url", usableResponse.recipes[k].source_url);
                 checkBox.attr("data-title", usableResponse.recipes[k].title);
-
+                dishTitle.append(part);
                 dishTitle.append(checkBox);
                 dishTitle.append(nextDish);
                 $("#recipes").append(dishTitle);

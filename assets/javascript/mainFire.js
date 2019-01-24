@@ -52,5 +52,9 @@ function getWindowLocation(){
     var longstring = window.location.href;
     var array = longstring.split("/");
     console.log(array[array.length -1]);
-    return array[array.length -1];
+    if(array[array.length -1] == ""){
+        return array[array.length -2];
+    } else {
+        return array[array.length -1];
+    }
 }

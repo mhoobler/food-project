@@ -62,7 +62,7 @@ $(document).on("click", "#show-recipes", function(){
             var cut_title = keys[i].split(" ").join("").replace(/[^a-zA-Z ]/g, "");
             console.log(cut_title);
             var div = $("<div>").addClass(cut_title);
-            var title = $("<h3>").text(keys[i]);
+            var title = $("<p>").text(keys[i]);
             var link = $("<a target='_blank'>").attr("href", JSON_object[keys[i]].url);
             var img = $("<img>").attr("src", JSON_object[keys[i]].img)
             var btn = $("<button class='remove-recipe'>").attr("data-rough", keys[i]);

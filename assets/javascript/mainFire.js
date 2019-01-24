@@ -20,7 +20,7 @@ function checkUser(){
         } else {
           // No user is signed in.
           updateNav(false);
-          if(getWindowLocation() != "signupPage.html" && getWindowLocation() != "login.html" && getWindowLocation() != "index.html"){
+          if(getWindowLocation() != "signupPage.html" && getWindowLocation() != "login.html" && getWindowLocation() != "index.html" && getWindowLocation() != "food-project"){
             document.location.href = "signupPage.html";
           }
           return false
